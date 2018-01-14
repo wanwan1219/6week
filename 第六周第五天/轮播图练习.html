@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        .banner ul li:nth-of-type(1){
+            background: url("img/1.jpg") no-repeat left;
+        }
+        .banner ul li:nth-of-type(2){
+            background: url("img/2.jpg") no-repeat left;
+        }
+        .banner ul li:nth-of-type(3){
+            background: url("img/3.jpg") no-repeat left;
+        }
+        .banner ul li:nth-of-type(4){
+            background: url("img/4.jpg") no-repeat left;
+        }
+        .banner ul li:nth-of-type(5){
+            background: url("img/5.jpg") no-repeat left;
+        }
+        .banner ul li:nth-of-type(6){
+            background: url("img/6.jpg") no-repeat left;
+        }
+        .banner ul li:nth-of-type(7){
+            background: url("img/1.jpg") no-repeat left;
+        }
+        .banner ul{
+            width: 10000px;
+            position: absolute;
+            left: 0;
+        }
+        .banner{
+            width: 1366px;
+            height: 480px;
+            position: relative;
+            overflow: hidden;
+        }
+        .banner ul li{
+            width: 1366px;
+            max-width: 1600px;
+            min-width: 1020px;
+            height: 480px;
+            float: left;
+            background-size:100% 100%;
+        }
+        .banner ol{
+            position: absolute;
+            right: 20px;
+            top: 30px;
+        }
+        .banner ol li{
+            width: 200px;
+            line-height: 70px;
+            font-size: 36px;
+            text-align: center;
+            background: rgba(0,0,0,.5);
+            color: white;
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+        .banner ol li.col{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div class="banner">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <ol>
+        <li class="col">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ol>
+</div>
+</body>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+    (function(){
+        var index=0,/*ul li索引*/
+                k=0, /*ol li索引*/
+                lis=$(".banner ol li"),
+                ul=$(".banner ul"),
+                wid=ul.find("li").width(),
+                len=ul.find("li").length;
+        lis.click(function(){
+            index=$(this).index();
+            lis.removeClass("col").eq(index).addClass("col");
+            ul.animate({left:-wid*index},900)
+        });
+        function right(){
+            index++;
+            if(index>len-1){
+                index=1;
+                ul.css({left:0})
+            }
+            ul.animate({left:-wid*index},900);
+            k++;
+            if(k>len-2){
+                k=0
+            }
+            lis.removeClass("col").eq(k).addClass("col");
+        }
+        timer=setInterval(right,2000);
+        $(".banner").hover(function(){
+            clearTimeout(timer)
+        },function(){
+            timer=setInterval(right,2000)
+        })
+    })();
+</script>
+</html>
